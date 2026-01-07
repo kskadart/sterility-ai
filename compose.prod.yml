@@ -1,0 +1,48 @@
+services:
+  sterility-ai:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: sterility-ai
+    image: sterility-ai:latest
+    ports:
+      - "8501:8501"
+    volumes:
+      # Model weights (read-only)
+      - ./models:/app/models:ro
+    environment:
+      - MODEL_PATH=/app/models/efficientnet_b0_tune_sterility_v0.0.1.pth
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      # Disable file watching for production
+      - STREAMLIT_SERVER_FILE_WATCHER_TYPE=none
+      - STREAMLIT_SERVER_RUN_ON_SAVE=false
+      # Python/PyTorch configuration
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=""
+    command: [
+      "streamlit", "run", "app.py",
+      "--server.address", "0.0.0.0",
+      "--server.port", "8501"
+    ]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+    networks:
+      - arag-common-network
+
+networks:
+  arag-common-network:
+    external: true

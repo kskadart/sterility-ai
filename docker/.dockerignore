@@ -1,0 +1,106 @@
+# Git and version control
+.git
+.gitignore
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files
+docker/
+Dockerfile*
+docker-compose*.yml
+
+# Models and large files (adjust as needed)
+models/*.pth
+*.pkl
+*.joblib
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+tmp/
+temp/
+
+# UV cache and downloads
+.uv/
+uv.cache/
+
+# Additional optimization exclusions
+*.md
+!README.md
+.DS_Store
+.git/
+*.git*
+node_modules/
+.npm/
+
+# Large data files (adjust as needed)
+*.csv
+*.json
+*.xml
+*.yaml
+*.yml
+!pyproject.toml
+!compose.yml
+
+# Documentation and examples
+docs/
+examples/
+screenshots/
+*.png
+*.jpg
+*.jpeg
+!tests/references/
